@@ -1,0 +1,16 @@
+[package]
+name = "siru"
+version = "0.1.0"
+authors = ["videogame hacker <half-kh-hacker@hackery.site>"]
+edition = "2018"
+
+
+[dependencies]
+comrak = "0.10.0"
+extract-frontmatter = "2.1.0"
+futures = "0.3.14"
+html5minify = "0.3.2"
+serde = { version = "1.0.125", features = ["derive"] }
+serde_yaml = "0.8.17"
+tera = "1.7.1"
+tokio = { version = "1.5.0", features = ["macros", "fs", "rt-multi-thread", "process"] }
