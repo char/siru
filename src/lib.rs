@@ -1,11 +1,5 @@
-mod markdown;
-pub use crate::markdown::*;
-
-mod minification;
-pub use crate::minification::*;
-
-mod tasks;
-pub use crate::tasks::*;
-
-mod templating;
-pub use crate::templating::*;
+pub mod markdown;
+pub mod minification;
+pub mod tasks;
+pub mod templating;
+pub mod yaml;

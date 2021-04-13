@@ -1,7 +1,8 @@
+use crate::yaml::parse_yaml;
+
 use comrak::{markdown_to_html, ComrakOptions};
 use extract_frontmatter::Extractor as FrontmatterExtractor;
 use serde::de::DeserializeOwned;
-use serde_yaml::from_str as parse_yaml;
 
 fn create_frontmatter_extractor(content: &str) -> FrontmatterExtractor {
     let mut extractor = FrontmatterExtractor::new(content);
