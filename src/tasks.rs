@@ -39,9 +39,7 @@ where
                 e.to_string().lines().for_each(|l| println!("  {}", l));
             }
 
-            _ => {
-                println!("{}: Success", &task_name);
-            }
+            _ => {}
         }
     }
 }
