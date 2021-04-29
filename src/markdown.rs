@@ -1,6 +1,6 @@
 use crate::yaml::parse_yaml;
 
-use comrak::{markdown_to_html, ComrakOptions};
+pub use comrak::{markdown_to_html, ComrakOptions};
 use extract_frontmatter::Extractor as FrontmatterExtractor;
 use serde::de::DeserializeOwned;
 
