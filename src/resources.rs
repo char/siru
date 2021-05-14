@@ -4,7 +4,7 @@ use std::{
 };
 
 pub struct Resources {
-    objects: HashMap<TypeId, Box<dyn Any>>,
+    objects: HashMap<TypeId, Box<dyn Any + Send + Sync>>,
 }
 
 impl Resources {
@@ -14,7 +14,7 @@ impl Resources {
         }
     }
 
-    pub fn add<T: 'static>(&mut self, resource: T) {
+    pub fn add<T: 'static + Send + Sync>(&mut self, resource: T) {
         let type_id = TypeId::of::<T>();
         self.objects.insert(type_id, Box::new(resource));
     }
@@ -24,7 +24,10 @@ impl Resources {
 
         self.objects
             .get(&type_id)
-            .and_then(|boxed_resource| boxed_resource.downcast_ref::<T>())
+            .and_then(|boxed_resource| {
+                let r: &dyn Any = boxed_resource.as_ref();
+                r.downcast_ref::<T>()
+            })
             .expect(&format!(
                 "Failed to get resource of type {}",
                 std::any::type_name::<T>()
