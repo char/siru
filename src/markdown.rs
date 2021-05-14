@@ -1,8 +1,11 @@
 use crate::yaml::parse_yaml;
 
-pub use comrak::{markdown_to_html, ComrakOptions};
+pub use comrak::markdown_to_html;
+use comrak::ComrakOptions;
 use extract_frontmatter::Extractor as FrontmatterExtractor;
 use serde::de::DeserializeOwned;
+
+pub type MarkdownOptions = ComrakOptions;
 
 fn create_frontmatter_extractor(content: &str) -> FrontmatterExtractor {
     let mut extractor = FrontmatterExtractor::new(content);
@@ -34,8 +37,18 @@ pub fn render_markdown<F>(content: &str) -> Result<(F, String), serde_yaml::Erro
 where
     F: DeserializeOwned,
 {
+    render_markdown_with_options(content, &MarkdownOptions::default())
+}
+
+pub fn render_markdown_with_options<F>(
+    content: &str,
+    options: &MarkdownOptions,
+) -> Result<(F, String), serde_yaml::Error>
+where
+    F: DeserializeOwned,
+{
     let (frontmatter, content) = extract_frontmatter(content);
-    let content = markdown_to_html(&content, &ComrakOptions::default());
+    let content = markdown_to_html(&content, options);
     let frontmatter: F = parse_yaml(&frontmatter)?;
     Ok((frontmatter, content))
 }
