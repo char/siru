@@ -12,7 +12,7 @@ fn create_frontmatter_extractor(content: &str) -> FrontmatterExtractor {
     extractor
 }
 
-fn extract_frontmatter(content: &str) -> (String, String) {
+pub fn extract_frontmatter(content: &str) -> (String, String) {
     let extractor = create_frontmatter_extractor(content);
     let frontmatter = extractor.extract();
     let content = extractor.remove();
