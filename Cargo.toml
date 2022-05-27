@@ -7,8 +7,9 @@ edition = "2018"
 
 [dependencies]
 askama = "0.10.5"
+chroma-syntaxis = { git = "https://git.lavender.software/charlotte/chroma-syntaxis.git", rev = "2b62e2" }
 colored = "2.0.0"
-comrak = "0.10.0"
+comrak = "0.12.1"
 extract-frontmatter = "2.1.0"
 futures = "0.3.14"
 html5minify = "0.3.2"
