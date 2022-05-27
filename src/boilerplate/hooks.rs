@@ -2,7 +2,7 @@ use crate::prelude::*;
 use std::path::PathBuf;
 
 pub fn mkdirs_hook(path: PathBuf, contents: Vec<u8>) -> std::io::Result<Vec<(PathBuf, Vec<u8>)>> {
-    let _ = path.parent().map(|parent| std::fs::create_dir_all(parent));
+    let _ = path.parent().map(std::fs::create_dir_all);
     Ok(vec![(path, contents)])
 }
 

@@ -28,9 +28,17 @@ impl Resources {
                 let r: &dyn Any = boxed_resource.as_ref();
                 r.downcast_ref::<T>()
             })
-            .expect(&format!(
-                "Failed to get resource of type {}",
-                std::any::type_name::<T>()
-            ))
+            .unwrap_or_else(|| {
+                panic!(
+                    "Failed to get resource of type {}",
+                    std::any::type_name::<T>()
+                )
+            })
+    }
+}
+
+impl Default for Resources {
+    fn default() -> Self {
+        Self::new()
     }
 }
